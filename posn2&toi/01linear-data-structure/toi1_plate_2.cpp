@@ -31,7 +31,7 @@ int main()
         cin >> sg >> sid;
         if (sg >= 1 && sg <= nc)
         {
-            std.push_back(Student(sg, sid));
+            std.emplace_back(sg, sid);
         }
     }
     deque<Student> deq;
@@ -60,7 +60,7 @@ int main()
 
             if (deq.empty())
             {
-                deq.push_back(estd);
+                deq.emplace_back(estd);
                 continue;
             }
             deque<Student> newQ;
@@ -69,20 +69,20 @@ int main()
             {
                 Student front = deq.front();
                 deq.pop_front();
-                newQ.push_back(front);
+                newQ.emplace_back(front);
 
                 if (!inserted && front.grade == estd.grade)
                 {
                     if (deq.empty() || deq.front().grade != estd.grade)
                     {
-                        newQ.push_back(estd);
+                        newQ.emplace_back(estd);
                         inserted = true;
                     }
                 }
             }
             if (!inserted)
             {
-                newQ.push_back(estd);
+                newQ.emplace_back(estd);
             }
             swap(deq, newQ);
         }

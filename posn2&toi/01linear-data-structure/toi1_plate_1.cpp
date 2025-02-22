@@ -25,7 +25,7 @@ int main()
         cin >> g >> id;
         if (g >= 1 && g <= nc)
         {
-            sv.push_back(Student(g, id));
+            sv.emplace_back(g, id);
         }
     }
 
@@ -65,7 +65,7 @@ int main()
             }
             if (!found || it == sdq.end())
             {
-                sdq.push_back(ens);
+                sdq.emplace_back(ens);
             }
         }
         else if (cmd == "D")

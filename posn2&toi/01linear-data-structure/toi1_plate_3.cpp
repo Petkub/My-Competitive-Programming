@@ -1,52 +1,75 @@
 #include <bits/stdc++.h>
 using namespace std;
 const char nl = '\n';
-typedef string str;
+using str = string;
+using psi = pair<str, int>;
 
 int main()
 {
     cin.tie(nullptr); ios::sync_with_stdio(false);
-    int nc, ns;
+    unordered_map<str, int> std;
+    deque<psi> stdQue;
+    
+    int ns, nc;
     cin >> nc >> ns;
-
-    unordered_map<str, int> stdMap;
-    unordered_map<int , deque<str>> stdQue;
-    deque<int> order;
-
     for (int i = 0; i < ns; i++)
     {
-        int grade;
+        int cls;
         str sid;
-        cin >> grade >> sid;
-        if (grade >= 1 && grade <= nc)
+        cin >> cls >> sid;
+        if (cls >= 1 && cls <= nc)
         {
-            stdMap[sid] = grade;
+            std[sid] = cls;
         }
     }
+    
     str cmd;
     while (cin >> cmd && cmd != "X")
     {
         if (cmd == "E")
         {
-            str eid;
-            cin >> eid;
-            auto it = stdMap.find(eid);
-            if (it == stdMap.end()) {continue;}
-            int curGrade = it->second;
+            str sid; cin >> sid;
+            pair<str, int> curStd;
+            auto it = std.find(sid);
+            if (it != std.end())
+            {
+                curStd = {sid, it->second};
+            }
+            else {continue;}
+            if (stdQue.empty())
+            {
+                stdQue.emplace_back(curStd);
+                continue;
+            }
+            int insertIdx = -1;
+            deque<psi> tempQue;
+            while (!stdQue.empty())
+            {
+                pair<str, int> curFront = stdQue.front();
+                stdQue.pop_front();
+                tempQue.emplace_back(curFront);
 
-            if (stdQue[curGrade].empty()) {order.push_back(curGrade);}
-            stdQue[curGrade].push_back(eid);
+                if (curFront.second == curStd.second)
+                {
+                    insertIdx = tempQue.size();
+                }
+            }
+            if (insertIdx != -1)
+            {
+                tempQue.insert(tempQue.begin() + insertIdx, curStd);
+            }
+            else
+            {
+                tempQue.emplace_back(curStd);
+            }
+            swap(stdQue, tempQue);
         }
         else
         {
-            if (!order.empty())
+            if (!stdQue.empty())
             {
-                cout << stdQue[order.front()].front() << nl;
-                stdQue[order.front()].pop_front();
-                if (stdQue[order.front()].empty())
-                {
-                    order.pop_front();
-                }
+                cout << stdQue.front().first << nl;
+                stdQue.pop_front();
             }
             else
             {
@@ -55,5 +78,6 @@ int main()
         }
     }
     cout << "0" << nl;
+    
     return (0);
 }
