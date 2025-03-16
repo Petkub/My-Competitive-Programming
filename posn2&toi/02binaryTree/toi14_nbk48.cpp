@@ -1,49 +1,49 @@
 #include <bits/stdc++.h>
 using namespace std;
-using ll = long long;
-using plli = pair<ll, int>;
-using pii = pair<int, int>;
+using ii = pair<int, int>;
+using vii = vector<ii>;
 const char nl = '\n';
 
 int main()
 {
-    cin.tie(nullptr); ios_base::sync_with_stdio(false);
-    int n, q; cin >> n >> q;
+    cin.tie(nullptr); ios::sync_with_stdio(false);
+    int N, Q;
+    cin >> N >> Q;
 
-    vector<pii> ppfs(n + 1);
+    vii ppfs(N + 1);
     ppfs[0] = {0, 0};
-    for (int i = 1; i <= n; i++)
+    for (size_t i = 1; i <= N; i++)
     {
         int p; cin >> p;
-        ppfs[i].first = ppfs[i - 1].first + p;
-        ppfs[i].second = i;
+        ppfs[i] = {ppfs[i - 1].first + p, i};
     }
     sort(ppfs.begin(), ppfs.end());
 
-    vector<pii> qr(q);
-    for (size_t i = 0; i < q; i++)
+    vii pq(Q);
+    for (size_t i = 0; i < Q; i++)
     {
-        int qj; cin >> qj;
-        qr[i] = {qj, i};
+        int j; cin >> j;
+        pq[i] = {j, i};
     }
-    sort(qr.begin(), qr.end());
+    sort(pq.begin(), pq.end());
 
+    int maxIdx = 0;
     int ptr = 0;
-    int mIdx = 0;
-    vector<int> output(q);
-    for (const pii &qq: qr)
+    vector<int> res(Q);
+    for (const ii &p: pq)
     {
-        while (ptr < n + 1 && ppfs[ptr].first <= qq.first)
+        int bud = p.first;
+        while (ptr <= N && bud >= ppfs[ptr].first)
         {
-            mIdx = max(mIdx, ppfs[ptr].second);
+            maxIdx = max(maxIdx, ppfs[ptr].second);
             ptr++;
         }
-        output[qq.second] = mIdx;
-    }
-    for (const int &o: output)
-    {
-        cout << o << nl;
+        res[p.second] = maxIdx;
     }
 
+    for (const int &r: res)
+    {
+        cout << r << nl;
+    }
     return (0);
 }

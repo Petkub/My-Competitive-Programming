@@ -1,0 +1,90 @@
+#include <bits/stdc++.h>
+using namespace std;
+using ll = long long;
+const char nl = '\n';
+
+// ประกาศตัวแปร global สำหรับกราฟและสีของเมือง
+vector<vector<int>> g;  // subgraph ที่สร้างจาก edge ที่ถูกสุดของแต่ละเมือง
+vector<int> col;        // สีของเมือง: 0 = ยังไม่ลงสี, 1 = สีแรก (Bunny), 2 = สีที่สอง (Duck)
+
+// ฟังก์ชัน DFS ลงสีแบบ bipartite (โดยไม่ใช้ lambda)
+void dfs(int u, int c) {
+    col[u] = c;
+    for (int v : g[u]) {
+        if (col[v] == 0) {
+            dfs(v, 3 - c);  // สลับสี: ถ้า c=1 ให้เป็น 2; ถ้า c=2 ให้เป็น 1
+        }
+    }
+}
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    // Step 1: รับอินพุต จำนวนเมือง n และจำนวนถนน m
+    int n, m;
+    cin >> n >> m;
+    
+    // สร้างกราฟแบบ adjacency list สำหรับเมือง 1-indexed
+    // แต่ละเมืองจะเก็บคู่ {w, adjacent_city}
+    vector<vector<pair<int, int>>> adj(n + 1);
+    for (int i = 0; i < m; i++){
+        int u, v, w;
+        cin >> u >> v >> w;
+        adj[u].push_back({w, v});
+        adj[v].push_back({w, u});
+    }
+    
+    // Step 2: สำหรับแต่ละเมือง sort รายการข้างเคียงตามน้ำหนัก (w) เพื่อหา edge ที่มีน้ำหนักน้อยที่สุด
+    for (int i = 1; i <= n; i++){
+        sort(adj[i].begin(), adj[i].end());
+    }
+    
+    // Step 3: สำหรับแต่ละเมือง เลือก edge ที่มีน้ำหนักน้อยที่สุด
+    // partner[i] = เมืองที่เชื่อมกับเมือง i ผ่าน edge ที่มีน้ำหนักน้อยสุด
+    vector<int> partner(n + 1, 0);
+    ll ans = 0; // คำตอบคือ maximum inconvenience = max(edge_weight ที่เลือก)
+    for (int i = 1; i <= n; i++){
+        if (!adj[i].empty()){
+            int w = adj[i][0].first;
+            int nb = adj[i][0].second;
+            partner[i] = nb;
+            // อัปเดตคำตอบ (ans) ให้เป็นค่าสูงสุดในบรรดา edge ที่เลือก
+            if (w > ans)
+                ans = w;
+        }
+    }
+    
+    // Step 4: สร้าง subgraph โดยเชื่อมต่อเมือง i กับ partner[i]
+    // หาก partner[partner[i]] == i ให้ข้าม (เพื่อหลีกเลี่ยง duplicate)
+    g.assign(n + 1, vector<int>());
+    for (int i = 1; i <= n; i++){
+        int nb = partner[i];
+        if (nb != 0 && partner[nb] == i)
+            continue;  // หากคู่กันแล้วไม่เพิ่มซ้ำ
+        if (nb != 0) {
+            g[i].push_back(nb);
+            g[nb].push_back(i);
+        }
+    }
+    
+    // Step 5: ลงสีกราฟแบบ bipartiteโดยใช้ DFS
+    col.assign(n + 1, 0);
+    for (int i = 1; i <= n; i++){
+        if (col[i] == 0)
+            dfs(i, 1);  // เริ่ม DFS โดยกำหนดสีเริ่มต้นเป็น 1
+    }
+    
+    // Step 6: พิมพ์ผลลัพธ์
+    // บรรทัดแรก: ค่ามากสุดในบรรดา edge ที่เลือก (คือ maximum inconvenience)
+    cout << ans << "\n";
+    
+    // บรรทัดที่สอง: สตริงความยาว n แสดงการแบ่งสีของแต่ละเมือง
+    // ถ้า col[i] == 1 ให้พิมพ์ 'B' (Bunny) ถ้า 2 ให้พิมพ์ 'D' (Duck)
+    for (int i = 1; i <= n; i++){
+        cout << (col[i] == 1 ? 'B' : 'D');
+    }
+    cout << "\n";
+    
+    return 0;
+}
