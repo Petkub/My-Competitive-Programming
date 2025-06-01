@@ -4,5 +4,6 @@ test2.cpp
 text.txt
 a.out
 .vscode
-classroom
+classroom/
 test.py
+Makefile
