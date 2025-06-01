@@ -7,7 +7,8 @@ const char nl = '\n';
 
 int main()
 {
-    cin.tie(nullptr); ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    ios::sync_with_stdio(false);
     int N, Q;
     cin >> N >> Q;
 
@@ -26,7 +27,7 @@ int main()
     {
         pf[i].second = max(pf[i].second, pf[i - 1].second);
     }
-    
+
     while (Q--)
     {
         int q;

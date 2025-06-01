@@ -5,7 +5,8 @@ const char nl = '\n';
 
 int main()
 {
-    cin.tie(nullptr); ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    ios::sync_with_stdio(false);
 
     int N;
     cin >> N;
@@ -38,7 +39,10 @@ int main()
         {
             sum += other[k];
             count++;
-            if (sum >= upper) {break;}
+            if (sum >= upper)
+            {
+                break;
+            }
         }
         cout << count << nl;
     }
