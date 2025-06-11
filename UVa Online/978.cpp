@@ -25,7 +25,9 @@ int main()
             cin >> n;
             blue.push(n);
         }
-
+        //B = 3
+        //green = 2
+        //blue = 1
         while (!green.empty() && !blue.empty())
         {
             int battle = min(B, (int)min(green.size(), blue.size()));
