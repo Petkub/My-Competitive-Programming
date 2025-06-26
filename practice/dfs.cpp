@@ -1,51 +1,40 @@
 #include<bits/stdc++.h>
 using namespace std;
-using vi = vector<int>;
-using vb = vector<bool>;
-using vvi = vector<vi>;
-const int INF=2e9;
-int V,E;
-
-vvi adj;
-vb vis;
+vector<vector<int>> adj;
+vector<bool> vis;
 
 void dfs(int n)
 {
     vis[n]=true;
-    cout<<n<<" ";
-    for(auto &u: adj[n])
+    cout<<"visitting "<<n<<'\n';
+    for(int &v: adj[n])
     {
-        if(!vis[u]) dfs(u);
+        if(!vis[v])
+        {
+            dfs(v);
+        }
     }
-    
 }
 
 int main()
 {
     cin.tie(0);ios::sync_with_stdio(0);
-    cin>>V>>E;
-    adj.resize(V);
-    vis.assign(V, false);
-
-    for(int i=0;i<E;i++)
+    int V=6,E=5;
+    adj.resize(V+1);
+    vis.assign(V+1, false);
+/*
+1 2
+2 4
+2 3
+4 6
+4 5
+*/
+    for(int i=1;i<=E;i++)
     {
         int u,v;cin>>u>>v;
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
-
-    int cc=0;
-    for(int i=0;i<V;i++)
-    {
-        if(!vis[i])
-        {
-            cc++;
-            cout<<"Node "<<i<<"->";
-            dfs(i);
-            cout<<"\n";
-        }
-    }
-    cout<<cc;
-    
+    dfs(1);
     return 0;
 }

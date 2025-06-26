@@ -13,16 +13,16 @@ int main()
         cin>>n;
         vote[n]++;
     }
-    int mx = vote.begin()->second;
-    int x= vote.begin()->first;
-    for (auto &[k, v]:vote)
+	auto [x,mx] = *vote.begin();
+    int nvote = x;
+    for (auto &[k,v]:vote)
     {
         if(v>=mx)
         {
             mx=v;
-            x=k;
+            nvote=k;
         }
     }
-    cout<<x;
+    cout<<nvote;
     return 0;
 }
