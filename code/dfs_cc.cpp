@@ -4,7 +4,7 @@ using vi = vector<int>;
 using vb = vector<bool>;
 using vvi = vector<vi>;
 const int INF=2e9;
-int V,E;
+int N,E;
 
 vvi adj;
 vb vis;
@@ -23,29 +23,24 @@ void dfs(int n)
 int main()
 {
     cin.tie(0);ios::sync_with_stdio(0);
-    cin>>V>>E;
-    adj.resize(V);
-    vis.assign(V, false);
-
+    cin>>N>>E;
+    adj.resize(N + 1);
+    vis.assign(N + 1, false);
     for(int i=0;i<E;i++)
     {
         int u,v;cin>>u>>v;
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
-
     int cc=0;
-    for(int i=0;i<V;i++)
+    for(int i=1;i<=N;i++)
     {
         if(!vis[i])
         {
-            cc++;
-            cout<<"Node "<<i<<"->";
             dfs(i);
-            cout<<"\n";
+            cc++;
         }
     }
-    cout<<cc;
-    
+    cout<<cc; 
     return 0;
 }

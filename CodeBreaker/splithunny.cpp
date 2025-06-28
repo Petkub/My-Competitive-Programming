@@ -36,10 +36,7 @@ bool valid(int x, int y)
 
 void dfs(int x, int y)
 {
-    if(!valid(x,y) || grid[x][y]=='.' || vis[x][y])
-    {
-        return;
-    }
+    if(!valid(x,y) or grid[x][y]=='.' or vis[x][y]) return;
     vis[x][y]=true;
     dfs(x+1,y);
     dfs(x-1,y);

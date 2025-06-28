@@ -6,4 +6,5 @@ a.out
 .vscode
 classroom/
 test.py
+.cph
 Makefile
