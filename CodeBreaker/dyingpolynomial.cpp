@@ -1,30 +1,36 @@
 #include<bits/stdc++.h>
 using namespace std;
-using ll = long long;
+#define int long long
+int A,B,C,D;
 
-int main()
+bool check(int x)
 {
-    cin.tie(nullptr);ios::sync_with_stdio(false);
-    ll T,A,B,C,D;
-    cin>>T;
-    while(T--)
+    return (A*x*x*x)+(B*x*x)+(C*x) >= D;
+}
+
+int32_t main()
+{
+    cin.tie(0);ios::sync_with_stdio(0);
+    int Q; cin>>Q;
+    for(int i=1;i<=Q;i++)
     {
         cin>>A>>B>>C>>D;
-        int l=1;
-        int h=1e5;
-        int ans=h;
-        while(l<=h)
+        int low = 1, high = 100000, ans = high;
+        while(low <= high)
         {
-            ll x=l+(h-l)/2;
-            ll s=A*x*x*x+B*x*x+C*x;
-            if(s>=D)
+            int mid = (low + high) / 2;
+            if (check(mid))
             {
-                h=x-1;
-                ans=x;
+                ans = mid;
+                high = mid - 1;
             }
-            else {l=x+1;}
+            else
+            {
+                low = mid + 1;
+            }
         }
         cout<<ans<<'\n';
     }
     return 0;
 }
+

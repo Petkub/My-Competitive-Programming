@@ -8,3 +8,5 @@ classroom/
 test.py
 .cph
 Makefile
+preposn/
+*bin

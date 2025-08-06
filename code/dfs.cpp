@@ -22,13 +22,7 @@ int main()
     int V=6,E=5;
     adj.resize(V+1);
     vis.assign(V+1, false);
-/*
-1 2
-2 4
-2 3
-4 6
-4 5
-*/
+
     for(int i=1;i<=E;i++)
     {
         int u,v;cin>>u>>v;
@@ -38,3 +32,11 @@ int main()
     dfs(1);
     return 0;
 }
+
+/*
+1 2
+2 4
+2 3
+4 6
+4 5
+*/

@@ -1,26 +1,39 @@
 #include<bits/stdc++.h>
 using namespace std;
-using ll = long long;
-
-int main()
+#define int long long
+int t;
+int check(int x)
 {
-    cin.tie(nullptr);ios::sync_with_stdio(false);
-    int N;
-    cin>>N;
+    return x*x*x;
+}
+
+int32_t main()
+{
+    cin.tie(0);ios::sync_with_stdio(0);
+    int N;cin>>N;
     while(N--)
     {
-        ll n;
-        cin>>n;
-        ll l=0;
-        ll h=1e6;
+        cin>>t;
+        int l=1,h=1e6,ans=h;
         while(l<=h)
         {
-            ll m=l+(h-l)/2;
-            ll cube=m*m*m;
-            if(cube==n) {cout<<m<<'\n'; break;}
-            else if(cube<n) {l=m+1;}
-            else if(cube>n) {h=m-1;}
+            int mid=(l+h)/2;
+            int cube=check(mid);
+            if(cube==t)
+            {
+                ans=mid;
+                break;
+            }
+            else if(cube<t)
+            {
+                l=mid+1;
+            }
+            else
+            {
+                h=mid-1;
+            }
         }
+        cout<<ans<<'\n';
     }
     return 0;
 }

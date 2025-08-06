@@ -5,14 +5,12 @@ using vb = vector<bool>;
 using vvi = vector<vi>;
 const int INF=2e9;
 int N,E;
-
 vvi adj;
 vb vis;
 
 void dfs(int n)
 {
     vis[n]=true;
-    cout<<n<<" ";
     for(auto &u: adj[n])
     {
         if(!vis[u]) dfs(u);
