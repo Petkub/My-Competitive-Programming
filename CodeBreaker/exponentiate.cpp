@@ -1,22 +1,25 @@
 #include<bits/stdc++.h>
 using namespace std;
-using ll=long long;
-using ull=unsigned long long;
+#define int long long
+int MOD;
 
-int main()
+int expo(int a, int p)
+{
+    if (p==0)return 1;
+    int ans=expo(a, p/2);
+    if(p%2==0) return (ans*ans)%MOD;
+    else return (a*ans*ans)%MOD;
+    
+}
+
+int32_t main()
 {
     cin.tie(0);ios::sync_with_stdio(0);
-    ull T,A,B,M;cin>>T;
+    int T;cin>>T;
     while(T--)
     {
-        cin>>A>>B>>M;
-        int ans=1;
-        while(B--)
-        {
-            ans=((ans*A)%M)%M;
-        }
-        cout<<ans<<'\n';
+        int A,B;cin>>A>>B>>MOD;
+        cout<<expo(A,B)<<'\n';
     }
-
     return 0;
 }
