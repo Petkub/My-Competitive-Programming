@@ -1,43 +1,37 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long
-int N, M;
-vector<int> B;
+int N,M;
+vector<int> arr;
 
-bool ok(int mid)
+bool can(int x)
 {
-    int s=0; int sq=1;
+    int n_sq=1;
+    int t=0;
     for(int i=0;i<N;i++)
     {
-        if(s+B[i]<=mid) {s+=B[i];}
-        else
+        if(t+arr[i]>x)
         {
-            sq++;
-            s=B[i];
+            n_sq++;
+            t=0;
         }
+        t+=arr[i];
     }
-    return sq<=M;
+    if(n_sq>M) return false;
+    return true;
 }
 
 int32_t main()
 {
-    cin.tie(0);ios::sync_with_stdio(0);
     cin>>N>>M;
-    B.resize(N);
-    int t=0,mx=0;
-    for(int &e:B)
-    {
-        cin>>e;
-        t+=e;
-        mx=max(mx,e);
-    }
-    int l=mx;
-    int h=t;
-    int ans=h;
+    arr.resize(N);
+    for(int i=0;i<N;i++) cin>>arr[i];
+
+    int l=1, h=1e9, ans=h;
     while(l<=h)
     {
         int mid=(l+h)/2;
-        if(ok(mid))
+        if(can(mid))
         {
             ans=mid;
             h=mid-1;
@@ -47,6 +41,7 @@ int32_t main()
             l=mid+1;
         }
     }
-    cout<<ans;
+    cout<<ans<<'\n';
     return 0;
 }
+
