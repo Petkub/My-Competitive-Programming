@@ -1,58 +1,63 @@
 #include<bits/stdc++.h>
 using namespace std;
-int V,E;
+#define int long long
+
 vector<vector<int>> adj;
 vector<bool> vis;
 
-// void dfs(int n)
-// {
-//     vis[n]=true;
-//     for(auto &v: adj[n])
-//     {
-//         if(!vis[v]) {dfs(v);}
-//     }
-// }
-
-void bfs(int n)
+void dfs(int n)
 {
-    queue<int> q;
     vis[n]=true;
-    q.push(n);
-    while(!q.empty())
+    for(auto nbr: adj[n])
     {
-        int u=q.front();q.pop();
-        for(auto &v: adj[u])
+        if(!vis[nbr])
         {
-            if(!vis[v])
-            {
-                vis[v]=true;
-                q.push(v);
-            }
+            dfs(nbr);
         }
     }
 }
 
-int main()
+// void bfs(int n)
+// {
+//     queue<int> q;
+//     q.push(n);
+//     while(!q.empty())
+//     {
+//         int u = q.front();
+//         q.pop();
+//         for(auto nbr: adj[u])
+//         {
+//             if(!vis[nbr])
+//             {
+//                 q.push(nbr);
+//                 vis[nbr]=true;
+//             }
+//         }
+//     }
+// }
+
+int32_t main()
 {
     cin.tie(0);ios::sync_with_stdio(0);
-    cin>>V>>E;
-    adj.resize(V);
-    vis.assign(V,false);
-    for(int i=0;i<E;i++)
+    int N,E; cin>>N>>E;
+    adj.resize(N);
+    vis.assign(N, false);
+    
+    for(int i=1;i<=E;i++)
     {
-        int a,b;cin>>a>>b;
-        adj[a].push_back(b);
-        adj[b].push_back(a);
+        int u,v; cin>>u>>v;
+        adj[u].push_back(v);
+        adj[v].push_back(u);
     }
     int cc=0;
-    for(int i=0;i<V;i++)
+    for(int i=0;i<N;i++)
     {
-        if(!vis[i])
-        {
-            cc++;
-            bfs(i);
-        }
+        if(!vis[i]) dfs(i),cc++;
     }
+    // for(int i=0;i<N;i++)
+    // {
+    //     if(!vis[i]) bfs(i),cc++;
+    // }
     cout<<cc;
     return 0;
 }

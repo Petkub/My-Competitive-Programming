@@ -11,3 +11,5 @@ Makefile
 preposn/
 *bin
 /output
+/testtest
+/theory_posn
