@@ -1,38 +1,32 @@
-#include <bits/stdc++.h>
+/*
+    toi6_jail
+    programming.in.th (toi6_jail)
+*/
+// #include <bits/stdc++.h>
+#include<iostream>
+#include<queue>
 using namespace std;
-using vi = vector<int>;
-using vb = vector<bool>;
 
 int main()
 {
     cin.tie(nullptr); ios::sync_with_stdio(false);
     int n, m;
     cin >> n >> m;
-    
-    vi j(n);
-    vb visited(n, false);
-    iota(j.begin(), j.end(), 1);
-    
-    int visitedCnt = 0;
-    int pos = 0;
-    while (visitedCnt < n)
+    queue<int> q;
+    for(int i=0;i<n;i++)
     {
-        int s = 0;
-        while (s < m - 1)
+        q.push(i+1);
+    }
+
+    while(!q.empty())
+    {
+        for(int i=1;i<=m-1;i++)
         {
-            if (!visited[pos]) {s++;}
-            pos = (pos + 1) % n;
+            q.push(q.front());
+            q.pop();
         }
-        while (visited[pos])
-        {
-            pos = (pos + 1) % n;
-        }
-        cout << j[pos] << " ";
-        
-        visited[pos] = true;
-        visitedCnt++;
-        
-        pos = (pos + 1) % n;
+        cout<<q.front()<<" ";
+        q.pop();
     }
     return (0);
 }

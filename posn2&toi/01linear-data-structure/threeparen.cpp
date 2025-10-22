@@ -1,14 +1,13 @@
+/*
+    threeparen
+    programming.in.th (1121)
+*/
 #include <bits/stdc++.h>
 using namespace std;
 
-typedef string str;
-typedef const char cc;
-using stc = stack<char>;
-const char nl = '\n';
-
-bool isMatch(cc &st, cc &c)
+bool isMatch(char top, char c)
 {
-    return st == '(' && c == ')' || st == '[' && c == ']' || st == '{' && c == '}';
+    return top == '(' and c == ')' or top == '[' and c == ']' or top == '{' && c == '}';
 }
 
 int main()
@@ -19,32 +18,32 @@ int main()
     
     while (n--)
     {
-        str s;
-        stc st;
+        string s;
+        stack<char> stk;
         bool correct = true;
         cin >> s;
-        for (cc &c: s)
+        for(int i=0;i<s.length();i++)
         {
-            if (c == '(' || c == '{' || c == '[')
+            if (s[i] == '(' or s[i] == '{' or s[i] == '[')
             {
-                st.push(c);
+                stk.push(s[i]);
             }
             else
             {
-                if (st.empty() || !(isMatch(st.top(), c)))
+                if (stk.empty() or !(isMatch(stk.top(), s[i])))
                 {
                     correct = false;
                     break;
                 }
-                st.pop();
+                stk.pop();
             }
         }
-        if (!st.empty())
+        if (!stk.empty())
         {
             correct = false;
         }
 
-        cout << (correct? "yes":"no") << nl;
+        cout << (correct? "yes":"no") << '\n';
     }
     return (0);
 }

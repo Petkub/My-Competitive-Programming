@@ -1,45 +1,37 @@
+/*
+    stack
+*/
 #include <bits/stdc++.h>
 using namespace std;
-
-typedef string str;
-using vs = vector<string>;
-using sts = stack<string>;
 
 int main()
 {
     ios::sync_with_stdio(false); cin.tie(0);
-
     int n; cin >> n;
-    vs vt;
-    sts st;
+    stack<int> stk;
 
     while (n--)
     {
-        str s;
+        string s;
         cin >> s;
         if (s == "push")
         {
-            str val;
+            int val;
             cin >> val;
-            st.push(val);
+            stk.push(val);
         }
         else
         {
-            if (!st.empty())
+            if (!stk.empty())
             {
-                vt.push_back(st.top());
-                st.pop();
+                cout<<stk.top();
+                stk.pop();
             }
             else
             {
-                vt.push_back("null");
+                cout<<"null";
             }
         }
     }
-    for (const str &s: vt)
-    {
-        cout << s << '\n';
-    }
-
     return (0);
 }

@@ -1,22 +1,25 @@
-#include<bits/stdc++.h>
-using namespace std;
-#define int long long
+/*
+    c1_bkk67_2
+*/
+#include<stdio.h>
+#include<string.h>
 
-int32_t main()
+int arr[200];
+int main()
 {
-    cin.tie(0);ios::sync_with_stdio(0);
-    string s1,s2; cin>>s1>>s2;
-    char arr[200];
-    memset(arr, -1, sizeof(arr));
-
-    for(size_t i=0;i<s1.length();i++)
+    char s1[21],s2[21];
+    scanf("%s%s",s1,s2);
+    for(int i=0;i<strlen(s1);i++)
     {
-        for(size_t j=0;j<s2.length();j++)
+        for(int j=0;j<strlen(s2);j++)
         {
-            if(s1[i]==s2[j] and arr[(int)s1[i]]==-1)
+            if(s1[i]==s2[j])
             {
-                cout<<s1[i]<<" ";
-                arr[(int)s1[i]]++;
+                if(arr[s1[i]]==0)
+                {
+                    printf("%c ",s1[i]);
+                    arr[s1[i]]=1;
+                }
             }
         }
     }

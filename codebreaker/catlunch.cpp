@@ -1,12 +1,31 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-using ll = long long;
+#define int long long
 
-int main()
+int32_t main()
 {
-    cin.tie(nullptr); ios::sync_with_stdio(false);
-    int N, K;
-    cin>>N>>K;
-    
+    cin.tie(0);ios::sync_with_stdio(0);
+    int n,k,cur=0,mx = 0; 
+    cin>>n>>k;
+    priority_queue <int> pq;
+    for (int i = 0;i<n;i++)
+    { 
+        int a; cin >> a; 
+        if (a >= 0)
+        {
+            cur+=a; 
+        }
+        else
+        {
+            pq.push(a); 
+            if (pq.size() >= k)
+            {
+                cur += pq.top();
+                pq.pop();
+            }
+        } 
+        mx=max(cur,mx);
+    }
+    cout<<mx;
     return 0;
 }

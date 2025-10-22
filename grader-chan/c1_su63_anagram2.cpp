@@ -1,43 +1,43 @@
-#include<bits/stdc++.h>
-using namespace std;
-#define int long long
+/*
+    c1_su63_anagram2
+*/
+#include<stdio.h>
+#include<string.h>
+#include<math.h>
+int arr1[200];
+int arr2[200];
 
-int32_t main()
+int main()
 {
     char s1[10005],s2[10005];
     scanf("%s%s", s1,s2);
-    int a1[200],a2[200];
-    memset(a1, -1, sizeof(a1));
-    memset(a2, -1, sizeof(a2));
 
-    memset(a1+(int)'A', 0, sizeof(a1[0])*8);
-    memset(a2+(int)'A', 0, sizeof(a2[0])*8);
-    
-    for(int i=0;i<strlen(s1);i++) a1[s1[i]]++;
-    for(int i=0;i<strlen(s2);i++) a2[s2[i]]++;
-
-    for(char ch='A';ch<='H';ch++)
+    for(int i=0;i<strlen(s1);i++)
     {
-        printf("%lld ", a1[ch]);
+        arr1[s1[i]]++;
+    }
+    for(int i=0;i<strlen(s2);i++)
+    {
+        arr2[s2[i]]++;
+    }
+    for(char ch = 'A';ch<='H';ch++)
+    {
+        printf("%d ", arr1[ch]);
     }
     printf("\n");
-    for(char ch='A';ch<='H';ch++)
+    for(char ch = 'A';ch<='H';ch++)
     {
-        printf("%lld ", a2[ch]);
+        printf("%d ", arr2[ch]);
     }
     printf("\n");
-    int cnt=0;
-    for(char ch='A';ch<='H';ch++)
+    int tot=0;
+    for(int ch='A';ch<='H';ch++)
     {
-        int df = abs(a1[ch] - a2[ch]); 
-        if(df > 0)
-        {
-            cnt++;
-        }
-        printf("%lld ", df);
+        int diff = abs(arr1[ch]-arr2[ch]);
+        tot+=diff;
+        printf("%d ", diff);
     }
     printf("\n");
-    if(cnt>3) printf("no");
-    else printf("anagram");
+    printf(tot<=3? "anagram":"no");
     return 0;
 }

@@ -1,13 +1,11 @@
-#include<bits/stdc++.h>
-using namespace std;
-#define int long long
+/*
+    c1_bkk67_3
+*/
+#include<stdio.h>
 
-int32_t main()
+int main()
 {
-    cin.tie(0);ios::sync_with_stdio(0);
-    int t;cin>>t;
-    t++;
-    int h = 6*t*t-14*t+8;
-    cout<<h;
+    int t; scanf("%d", &t);
+    printf("%d", 3*t*t+t);
     return 0;
 }

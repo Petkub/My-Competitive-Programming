@@ -4,24 +4,24 @@ using namespace std;
 
 int32_t main()
 {
-    cin.tie(0);ios::sync_with_stdio(0);
-    int n; cin>>n;
-    vector<int> arr(n),dp(n);
-    for(int i=0;i<n;i++) cin>>arr[i];
+    cin.tie(0); ios::sync_with_stdio(0);
+    vector<int> arr = {1, 2, 0, 4, 3, 5, -1};
+    int n=arr.size();
+    vector<int> dp(n);
     dp[0]=1;
-    int mx=dp[0];
+    int mx=1;
     for(int i=1;i<n;i++)
     {
         dp[i]=1;
         for(int j=0;j<i;j++)
         {
-            if(arr[j]<arr[i])
+            if(arr[j] < arr[i])
             {
                 dp[i]=max(dp[i], dp[j]+1);
-                mx=max(mx,dp[i]);
             }
         }
+        mx=max(mx,dp[i]);
     }
-    cout<<mx;
+    cout<<mx<<'\n';
     return 0;
 }

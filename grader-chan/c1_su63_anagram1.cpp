@@ -1,25 +1,23 @@
-#include<iostream>
+/*
+    c1_su63_anagram1
+*/
+#include<stdio.h>
 #include<string.h>
-using namespace std;
-#define int long long
 
-int32_t main()
+int arr[200];
+
+int main()
 {
-    char str[10005];
-    scanf("%s", str);
-    int arr[200];
-    memset(arr, -1, sizeof(arr));
-    memset(arr+(int)'A', 0, sizeof(arr[0])*8);
+    char s[10005];
+    scanf("%s", s);
 
-    for(size_t i=0;i<strlen(str);i++)
+    for(int i=0;i<strlen(s);i++)
     {
-        arr[str[i]]++;
+        arr[s[i]]++;
     }
-
-    for(char ch='A';ch<='H';ch++)
+    for(char ch = 'A';ch<='H';ch++)
     {
-        printf("%d ",arr[ch]);
+        printf("%d ", arr[ch]);
     }
-    
     return 0;
 }

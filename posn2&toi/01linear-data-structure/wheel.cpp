@@ -1,42 +1,41 @@
-#include <bits/stdc++.h>
+/*
+    wheel
+    programming.in.th (1055)
+*/
+// #include <bits/stdc++.h>
+#include<iostream>
+#include<queue>
 using namespace std;
-typedef long long ll;
-using vl = vector<ll>;
-using dqi = deque<int>;
-const char nl = '\n';
+#define int long long
 
+int res[25];
 
-int main()
+int32_t main()
 {
     cin.tie(0); ios::sync_with_stdio(false);
     int n, k;
     cin >> n >> k;
-
-    vl vt(k);
-    dqi dq;
-    for (size_t i = 1; i <= n; i++)
+    queue<int> q;
+    for(int i=0;i<n;i++)
     {
-        int val;
-        cin >> val;
-        dq.push_back(val);
+        int v; cin>>v;
+        q.push(v);
     }
-    int i = 0;
-    while (!dq.empty())
+    int p=0;
+    while(!q.empty())
     {
-        int rand;
-        cin >> rand;
-        for (size_t i = 1; i <= rand; i++)
+        int rand; cin>>rand;
+        for(int i=1;i<=rand;i++)
         {
-            dq.push_back(dq.front());
-            dq.pop_front();
+            q.push(q.front());
+            q.pop();
         }
-        vt[i++ % k] += dq.front();
-        dq.pop_front();
+        res[p++ % k] += q.front();
+        q.pop();
     }
-
-    for (const int &i: vt)
+    for(int i=0;i<k;i++)
     {
-        cout << i << nl;
+        cout<<res[i]<<"\n";
     }
     return (0);
 }
