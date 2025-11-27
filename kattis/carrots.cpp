@@ -5,14 +5,12 @@ using namespace std;
 int32_t main()
 {
     cin.tie(0);ios::sync_with_stdio(0);
-    int n;cin>>n;
-    int even=0,odd=0;
+    int n, p; cin>>n>>p;
     for(int i=0;i<n;i++)
     {
-        int n;cin>>n;
-        if(n&1) odd++;
-        else even++;
+        string s;
+        getline(cin,s);
     }
-    cout<<odd*even;
+    cout<<p;
     return 0;
 }

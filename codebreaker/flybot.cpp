@@ -1,45 +1,28 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long
-#define vi vector<int>
-#define vvi vector<vi>
-int H,W;
-vector<string> arr;
-vector<vector<bool>> path;
-vvi memo;
-const int MOD=1000000007;
-
-int solve(int y, int x)
-{
-    if(y<0 or x<0) return 0;
-    if(!path[y][x]) return 0;
-    if(x==0 and y==0) return 1;
-    if(memo[y][x]!=-1) return memo[y][x];
-    return memo[y][x]=(solve(y-1,x)+solve(y,x-1))%MOD;
-}
-
+const int MOD=1e9+7;
 int32_t main()
 {
     cin.tie(0);ios::sync_with_stdio(0);
-    cin>>H>>W;
-    memo.assign(H+1, vi(W+1,-1));
-    path.assign(H+1, vector<bool>(W+1,true));
-    for(int i=0;i<H;i++)
+    int h,w;cin>>h>>w;
+    vector<string> arr;
+    for(int i=0;i<h;i++)
     {
         string s;cin>>s;
         arr.push_back(s);
     }
-    for(int y=0;y<H;y++)
+    vector<vector<int>> dp(h+1,vector<int>(w+1,0));
+    dp[1][1]=1;
+    for(int y=1;y<=h;y++)
     {
-        for(int x=0;x<W;x++)
+        for(int x=1;x<=w;x++)
         {
-            if(arr[y][x]=='X')
-            {
-                path[y][x]=false;
-            }
+            if(y==1 and x==1)continue;
+            if(arr[y-1][x-1]=='X')continue;
+            dp[y][x]=(dp[y-1][x]+dp[y][x-1])%MOD;
         }
     }
-
-    cout<<solve(H-1,W-1);
+    cout<<dp[h][w];
     return 0;
 }

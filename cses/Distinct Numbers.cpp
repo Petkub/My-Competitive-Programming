@@ -6,13 +6,12 @@ int32_t main()
 {
     cin.tie(0);ios::sync_with_stdio(0);
     int n;cin>>n;
-    int even=0,odd=0;
+    set<int> s;
     for(int i=0;i<n;i++)
     {
-        int n;cin>>n;
-        if(n&1) odd++;
-        else even++;
+        int a;cin>>a;
+        s.insert(a);
     }
-    cout<<odd*even;
+    cout<<s.size();
     return 0;
 }

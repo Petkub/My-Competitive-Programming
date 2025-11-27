@@ -1,10 +1,12 @@
 #include<bits/stdc++.h>
 using namespace std;
-using ll=long long;
-int main()
+#define int long long
+
+int32_t main()
 {
     cin.tie(0);ios::sync_with_stdio(0);
-    ll n,d;cin>>n>>d;
-    cout<<ceil((double)n/d);
+    int h;
+    cin>>h;
+    cout<<h*h;
     return 0;
-}
+}   

@@ -5,14 +5,10 @@ using namespace std;
 int32_t main()
 {
     cin.tie(0);ios::sync_with_stdio(0);
-    int n;cin>>n;
-    int even=0,odd=0;
-    for(int i=0;i<n;i++)
+    int a, b;
+    while(cin>>a>>b)
     {
-        int n;cin>>n;
-        if(n&1) odd++;
-        else even++;
+        cout<<abs(a-b)<<'\n';
     }
-    cout<<odd*even;
     return 0;
 }
