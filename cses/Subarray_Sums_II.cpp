@@ -7,16 +7,20 @@ int32_t main()
     cin.tie(0);
     ios::sync_with_stdio(0);
 
-    int n,x;cin>>n>>x;
-    vector<int> v(n+1,0),pfx(n+1,0);
+    int n,x,cnt=0;cin>>n>>x;
+    map<int,int> mp;
+    mp[0]=1;
+    int pfx=0,a=0;
     for(int i=1;i<=n;i++)
     {
-        cin>>v[i];
-        pfx[i]=v[i]+pfx[i-1];
+        cin>>a;
+        pfx+=a;
+        if(mp.count(pfx-x))
+        {
+            cnt+=mp[pfx-x];
+        }
+        mp[pfx]++;
     }
-    for (int i=1;i<=n;i++)
-    {
-        
-    }
+    cout<<cnt;
     return 0;
 }
