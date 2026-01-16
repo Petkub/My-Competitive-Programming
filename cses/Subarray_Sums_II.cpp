@@ -9,17 +9,20 @@ int32_t main()
 
     int n,x,cnt=0;cin>>n>>x;
     map<int,int> mp;
-    mp[0]=1;
-    int pfx=0,a=0;
+    vector<int> pf(n+1, 0);
     for(int i=1;i<=n;i++)
     {
-        cin>>a;
-        pfx+=a;
-        if(mp.count(pfx-x))
+        int a; cin>>a;
+        pf[i] = a + pf[i-1];
+    }
+    mp[0]=1;
+    for(int i=1;i<=n;i++)
+    {
+        if(mp.count(pf[i]-x))
         {
-            cnt+=mp[pfx-x];
+            cnt+=mp[pf[i]-x];
         }
-        mp[pfx]++;
+        mp[pf[i]]++;
     }
     cout<<cnt;
     return 0;
